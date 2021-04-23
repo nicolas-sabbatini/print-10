@@ -456,6 +456,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "macroquad-canvas-2d"
+version = "0.1.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "81832050b8d1ac5dd396c4ebca0240368e97eabbb2e37f978f09f1084d87cbe6"
+dependencies = [
+ "macroquad",
+]
+
+[[package]]
 name = "macroquad_macro"
 version = "0.1.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -718,6 +727,7 @@ name = "print-10"
 version = "0.1.0"
 dependencies = [
  "macroquad",
+ "macroquad-canvas-2d",
 ]
 
 [[package]]

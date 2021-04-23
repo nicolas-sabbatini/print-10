@@ -6,6 +6,7 @@ edition = "2018"
 
 [dependencies]
 macroquad = "0.3.0-alpha.17"
+macroquad-canvas-2d = "0.1.0"
 
 [profile.dev.package.'*']
 opt-level = 3

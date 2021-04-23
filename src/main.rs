@@ -13,11 +13,16 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-
 use macroquad::prelude::*;
 use macroquad::rand::{rand, srand};
-use print_10::{CANVAS_WIDTH, CANVAS_HEIGHT, BACKGROUND_COLOR, FRAME_COLOR};
-use print_10::canvas::Canvas2D;
+use macroquad_canvas_2d::Canvas2D;
+
+const CANVAS_WIDTH: f32 = 320.0;
+const CANVAS_HEIGHT: f32 = 200.0;
+
+const FRAME_COLOR: Color = Color::new(0.0 / 255.0, 136.0 / 255.0, 255.0 / 255.0, 1.0);
+const BACKGROUND_COLOR: Color = Color::new(0.0, 0.0, 170.0 / 255.0, 1.0);
+
 
 // Screen configuration
 fn window_conf() -> Conf {
