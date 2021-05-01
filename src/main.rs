@@ -23,7 +23,6 @@ const CANVAS_HEIGHT: f32 = 200.0;
 const FRAME_COLOR: Color = Color::new(0.0 / 255.0, 136.0 / 255.0, 255.0 / 255.0, 1.0);
 const BACKGROUND_COLOR: Color = Color::new(0.0, 0.0, 170.0 / 255.0, 1.0);
 
-
 // Screen configuration
 fn window_conf() -> Conf {
   Conf {
@@ -34,6 +33,7 @@ fn window_conf() -> Conf {
   }
 }
 
+#[derive(Debug)]
 enum Charter {
   Left,
   Right,
@@ -60,7 +60,6 @@ async fn main() {
   srand((get_time() * 1099511627776.0) as u64);
 
   loop {
-
     // Clear screen
     clear_background(FRAME_COLOR);
 
@@ -70,6 +69,8 @@ async fn main() {
     } else {
       vec_char.push(Charter::Right);
     }
+
+    println!("{:?}", vec_char);
 
     if vec_char.len() > ((CANVAS_HEIGHT / 8.0) * (CANVAS_WIDTH / 8.0)) as usize {
       vec_char.drain(0..40);
@@ -81,22 +82,56 @@ async fn main() {
         let (x, y) = vec_idx_to_canvas(i);
         match char {
           Charter::Left => {
-            draw_line(x * 8.0 + 1.0, y * 8.0 + 1.0, x * 8.0 + 7.0, y * 8.0 + 7.0, 4.0, FRAME_COLOR);
-            draw_triangle(Vec2::new(x * 8.0, y * 8.0), Vec2::new(x * 8.0 + 4.0, y * 8.0), Vec2::new(x * 8.0, y * 8.0 + 4.0), FRAME_COLOR);
-            draw_triangle(Vec2::new(x * 8.0 + 8.0, y * 8.0 + 8.0), Vec2::new(x * 8.0 + 5.0, y * 8.0 + 8.0), Vec2::new(x * 8.0 + 8.0, y * 8.0 + 5.0), FRAME_COLOR);
+            draw_line(
+              x * 8.0 + 1.0,
+              y * 8.0 + 1.0,
+              x * 8.0 + 7.0,
+              y * 8.0 + 7.0,
+              4.0,
+              FRAME_COLOR,
+            );
+            draw_triangle(
+              Vec2::new(x * 8.0, y * 8.0),
+              Vec2::new(x * 8.0 + 4.0, y * 8.0),
+              Vec2::new(x * 8.0, y * 8.0 + 4.0),
+              FRAME_COLOR,
+            );
+            draw_triangle(
+              Vec2::new(x * 8.0 + 8.0, y * 8.0 + 8.0),
+              Vec2::new(x * 8.0 + 5.0, y * 8.0 + 8.0),
+              Vec2::new(x * 8.0 + 8.0, y * 8.0 + 5.0),
+              FRAME_COLOR,
+            );
           }
           Charter::Right => {
-            draw_line(x * 8.0 + 1.0, y * 8.0 + 7.0, x * 8.0 + 7.0, y * 8.0 + 1.0, 4.0, FRAME_COLOR);
-            draw_triangle(Vec2::new(x * 8.0, y * 8.0 + 8.0), Vec2::new(x * 8.0 + 3.0, y * 8.0 + 8.0), Vec2::new(x * 8.0, y * 8.0 + 4.0), FRAME_COLOR);
-            draw_triangle(Vec2::new(x * 8.0 + 8.0, y * 8.0), Vec2::new(x * 8.0 + 4.0, y * 8.0), Vec2::new(x * 8.0 + 8.0, y * 8.0 + 3.0), FRAME_COLOR);
+            draw_line(
+              x * 8.0 + 1.0,
+              y * 8.0 + 7.0,
+              x * 8.0 + 7.0,
+              y * 8.0 + 1.0,
+              4.0,
+              FRAME_COLOR,
+            );
+            draw_triangle(
+              Vec2::new(x * 8.0, y * 8.0 + 8.0),
+              Vec2::new(x * 8.0 + 3.0, y * 8.0 + 8.0),
+              Vec2::new(x * 8.0, y * 8.0 + 4.0),
+              FRAME_COLOR,
+            );
+            draw_triangle(
+              Vec2::new(x * 8.0 + 8.0, y * 8.0),
+              Vec2::new(x * 8.0 + 4.0, y * 8.0),
+              Vec2::new(x * 8.0 + 8.0, y * 8.0 + 3.0),
+              FRAME_COLOR,
+            );
           }
         }
       }
     });
 
     // Calculate canvas dimensions and padding
-    let (left_padding, top_padding, dimensions) = canvas
-      .calculate_size_and_padding(screen_width() - 48.0, screen_height() - 48.0);
+    let (left_padding, top_padding, dimensions) =
+      canvas.calculate_size_and_padding(screen_width() - 48.0, screen_height() - 48.0);
 
     // Draw canvas on screen
     draw_texture_ex(
